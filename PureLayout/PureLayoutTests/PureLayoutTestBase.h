@@ -2,8 +2,8 @@
 //  PureLayoutTestBase.h
 //  PureLayout Tests
 //
-//  Copyright (c) 2014 Tyler Fox
-//  https://github.com/smileyborg/PureLayout
+//  Copyright (c) 2014-2015 Tyler Fox
+//  https://github.com/PureLayout/PureLayout
 //
 
 #import <XCTest/XCTest.h>
@@ -47,7 +47,7 @@ static const CGFloat kContainerViewHeight = 1000.0;
 @interface PureLayoutTestBase : XCTestCase
 
 // An array of viewA, viewB, viewC, and viewD
-@property (nonatomic, readonly) NSArray *viewArray;
+@property (nonatomic, readonly) __NSArray_of(ALView *) *viewArray;
 
 // The indendentation below represents how the view hierarchy is set up
 @property (nonatomic, strong) ALView *containerView;
@@ -61,6 +61,11 @@ static const CGFloat kContainerViewHeight = 1000.0;
 @property (nonatomic, strong) ALView *      viewB_A;
 @property (nonatomic, strong) ALView *  viewC;
 @property (nonatomic, strong) ALView *  viewD;
+
+/** Sets up the default view hierarchy for tests. Test subclasses may override this method to customize the view hierarchy set up. */
+- (void)setupViewHierarchy;
+/** Test subclasses should override this method with updated tests if the -[setupViewHierarchy] method is overridden. */
+- (void)testViewHierarchy;
 
 /** Forces the container view to immediately do a layout pass, which will evaluate the constraints and set the frames for the container view and subviews. */
 - (void)evaluateConstraints;

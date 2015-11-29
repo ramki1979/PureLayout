@@ -2,12 +2,12 @@
 //  ALiOSDemo1ViewController.m
 //  PureLayout Example-iOS
 //
-//  Copyright (c) 2014 Tyler Fox
-//  https://github.com/smileyborg/PureLayout
+//  Copyright (c) 2014-2015 Tyler Fox
+//  https://github.com/PureLayout/PureLayout
 //
 
 #import "ALiOSDemo1ViewController.h"
-#import "PureLayout.h"
+#import <PureLayout/PureLayout.h>
 
 @interface ALiOSDemo1ViewController ()
 

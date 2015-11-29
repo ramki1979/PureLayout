@@ -2,12 +2,12 @@
 //  ALiOSDemo9ViewController.m
 //  PureLayout Example-iOS
 //
-//  Copyright (c) 2014 Tyler Fox
-//  https://github.com/smileyborg/PureLayout
+//  Copyright (c) 2014-2015 Tyler Fox
+//  https://github.com/PureLayout/PureLayout
 //
 
 #import "ALiOSDemo9ViewController.h"
-#import "PureLayout.h"
+#import <PureLayout/PureLayout.h>
 
 @interface ALiOSDemo9ViewController ()
 
@@ -40,7 +40,7 @@
     if (!self.didSetupConstraints) {
         NSAssert(__PureLayout_MinSysVer_iOS_8_0, @"This demo requires iOS 8.0 or higher to run.");
         
-        // Before layoutMargins, this is a typical method of giving a subview some padding from its superview edges
+        // Before layout margins were introduced, this is a typical way of giving a subview some padding from its superview's edges
         [self.blueView autoPinToTopLayoutGuideOfViewController:self withInset:10.0];
         [self.blueView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 10.0, 10.0, 10.0) excludingEdge:ALEdgeTop];
         

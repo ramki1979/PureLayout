@@ -2,8 +2,8 @@
 //  PureLayoutInternalTests.m
 //  PureLayout Tests
 //
-//  Copyright (c) 2014 Tyler Fox
-//  https://github.com/smileyborg/PureLayout
+//  Copyright (c) 2014-2015 Tyler Fox
+//  https://github.com/PureLayout/PureLayout
 //
 
 #import "PureLayoutTestBase.h"
@@ -202,7 +202,12 @@
  */
 - (void)testCommonSuperviewOfViews
 {
-    NSArray *viewArray = @[self.viewA, self.viewB, self.viewC];
+    __NSArray_of(ALView *) *viewArray;
+    
+    viewArray = @[self.viewA, self.viewB, self.viewC];
+    XCTAssert([viewArray al_commonSuperviewOfViews] == self.containerView, @"The common superview of viewArray should be containerView.");
+    
+    viewArray = @[self.viewA_A, self.viewB_A];
     XCTAssert([viewArray al_commonSuperviewOfViews] == self.containerView, @"The common superview of viewArray should be containerView.");
     
     viewArray = @[self.viewC, self.viewB, self.viewA_A];
@@ -216,12 +221,16 @@
     
     viewArray = @[self.viewA_A_B, self.viewA_A_A, self.viewA, self.viewB, self.viewC, self.viewA_B, self.viewA_B_A, self.viewB, self.viewB_A];
     XCTAssert([viewArray al_commonSuperviewOfViews] == self.containerView, @"The common superview of viewArray should be containerView.");
+
+    viewArray = @[self.viewA];
+    XCTAssert([viewArray al_commonSuperviewOfViews] == self.containerView, @"The common superview of viewArray should be containerView.");
+    
     
     ALView *orphanView = [ALView newAutoLayoutView]; // has no superview
-    
+
     viewArray = @[orphanView];
-    XCTAssert([viewArray al_commonSuperviewOfViews] == orphanView, @"The common superview of viewArray should be orphanView.");
-    
+    XCTAssertThrows([viewArray al_commonSuperviewOfViews], @"An exception should be thrown as there is no common superview of viewArray.");
+
     viewArray = @[orphanView, self.viewC, self.viewB, self.viewA_A];
     XCTAssertThrows([viewArray al_commonSuperviewOfViews], @"An exception should be thrown as there is no common superview of viewArray.");
     
@@ -254,7 +263,7 @@
 - (void)testCopyViewsOnly
 {
     NSArray *startingArray = @[[NSObject new], [ALLabel new], [ALImageView new], [NSString new], [ALView new], [NSDecimalNumber new], [NSLayoutConstraint new]];
-    NSArray *viewsOnlyArray = [startingArray al_copyViewsOnly];
+    __NSArray_of(ALView *) *viewsOnlyArray = [startingArray al_copyViewsOnly];
     XCTAssert([viewsOnlyArray count] == 3, @"Only 3 objects should remain in the new array.");
     
     startingArray = @[[ALView newAutoLayoutView]];

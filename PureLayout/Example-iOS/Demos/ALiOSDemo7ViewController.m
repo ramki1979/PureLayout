@@ -2,12 +2,12 @@
 //  ALiOSDemo7ViewController.m
 //  PureLayout Example-iOS
 //
-//  Copyright (c) 2014 Tyler Fox
-//  https://github.com/smileyborg/PureLayout
+//  Copyright (c) 2014-2015 Tyler Fox
+//  https://github.com/PureLayout/PureLayout
 //
 
 #import "ALiOSDemo7ViewController.h"
-#import "PureLayout.h"
+#import <PureLayout/PureLayout.h>
 
 @interface ALiOSDemo7ViewController ()
 
@@ -110,7 +110,7 @@
                      completion:^(BOOL finished) {
                          // Run the animation again in the other direction
                          self.isAnimatingToEndState = !self.isAnimatingToEndState;
-                         if (self.navigationController) { // this will be nil if this view controller is no longer in the navigation stack
+                         if (self.navigationController) { // this will be nil if this view controller is no longer in the navigation stack (stops animation when this view controller is no longer onscreen)
                              [self animateLayoutWithSpringAnimation];
                          }
                      }];
@@ -134,7 +134,7 @@
                      completion:^(BOOL finished) {
                          // Run the animation again in the other direction
                          self.isAnimatingToEndState = !self.isAnimatingToEndState;
-                         if (self.navigationController) { // this will be nil if this view controller is no longer in the navigation stack
+                         if (self.navigationController) { // this will be nil if this view controller is no longer in the navigation stack (stops animation when this view controller is no longer onscreen)
                              [self animateLayoutWithRegularAnimation];
                          }
                      }];
